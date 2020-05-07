@@ -1,16 +1,52 @@
 ﻿@page "/student/list"
 
-<table>
+@using BlazorWebAssemblyApp.Model
+@using BlazorWebAssemblyApp.Data
+
+@inject HttpClient Http
+@inject Store Store
+
+<h1>List</h1>
+
+<p class="text-right">
+    <a class="btn btn-primary" href="/student/add">Add</a>
+</p>
+
+<table class="table">
     <tr>
-        <th>姓名</th>
-        <th>年龄</th>
-        <th>生日</th>
-        <th>班级</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Sex</th>
+        <th>Class</th>
+        <th></th>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    @if (_stutdents != null)
+    {
+        foreach (var item in _stutdents)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Age</td>
+                <td>@item.Sex</td>
+                <td>@item.Class</td>
+                <td>
+                    <a class="btn btn-primary" href="/student/modify/@item.Id">修改</a>
+                    <a class="btn btn-danger" href="/student/delete/@item.Id">删除</a>
+                </td>
+            </tr>
+        }
+    }
+
 </table>
+
+@code {
+    private List<Student> _stutdents => Store.GetStudents();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var students = await Http.GetFromJsonAsync<List<Student>>("/student");
+        Store.SetStudents(students);
+    }
+}

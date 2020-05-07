@@ -1,0 +1,48 @@
+﻿@page "/student/add"
+
+@using BlazorWebAssemblyApp.Model
+
+@inject HttpClient Http
+@inject NavigationManager NavManager
+
+<h1>Add</h1>
+
+<Edit Student="Student" OnSaveCallback="OnSaveAsync"></Edit>
+
+<div class="text-danger">
+    @_errmsg
+</div>
+
+@code {
+
+    private Student Student { get; set; }
+
+    private string _errmsg;
+
+    protected override Task OnInitializedAsync()
+    {
+        Student = new Student()
+        {
+            Id = 1
+        };
+
+        return base.OnInitializedAsync();
+    }
+
+    private async Task OnSaveAsync(Student student)
+    {
+        Student = student;
+
+        var result = await Http.PostAsJsonAsync("/student", Student);
+
+        if (result.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/student/list");
+        }
+        else
+        {
+            _errmsg = "保存失败";
+        }
+    }
+
+}

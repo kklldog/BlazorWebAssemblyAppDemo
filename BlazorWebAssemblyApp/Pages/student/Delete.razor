@@ -1,0 +1,47 @@
+﻿@page "/student/delete/{id:int}"
+
+@using BlazorWebAssemblyApp.Model
+@using BlazorWebAssemblyApp.Data
+
+@inject HttpClient Http
+@inject Store Store
+@inject NavigationManager NavManager
+@inject IJSRuntime JSRuntime
+
+<h1>Delete</h1>
+
+<h3>
+    确定删除（@Student.Id）@Student.Name ？
+</h3>
+
+<button class="btn btn-danger" @onclick="OnDeleteAsync">
+    删除
+</button>
+
+<CancelBtn Name="取消"></CancelBtn>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Student Student { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Student = Store.GetStudentById(Id);
+    }
+
+    private async Task OnDeleteAsync()
+    {
+        var result = await Http.DeleteAsync("/student/" + Id);
+        if (result.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/student/list");
+        }
+    }
+
+    private void OnCancel()
+    {
+        JSRuntime.InvokeVoidAsync("history.back");
+    }
+}

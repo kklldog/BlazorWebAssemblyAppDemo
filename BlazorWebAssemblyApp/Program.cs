@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BlazorWebAssemblyApp.Data;
 
 namespace BlazorWebAssemblyApp
 {
@@ -17,8 +18,9 @@ namespace BlazorWebAssemblyApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-           
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("https://localhost:6001") });
+            builder.Services.AddSingleton<Store>();
+
             await builder.Build().RunAsync();
         }
     }

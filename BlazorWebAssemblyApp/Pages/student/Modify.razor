@@ -1,0 +1,46 @@
+﻿@page "/student/modify/{Id:int}"
+
+@using BlazorWebAssemblyApp.Model
+@using BlazorWebAssemblyApp.Data
+
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@inject Store Store
+
+<h1>Modify</h1>
+
+<Edit Student="Student" OnSaveCallback="OnSaveAsync"></Edit>
+
+<div class="text-danger">
+    @_errmsg
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Student Student { get; set; }
+
+    private string _errmsg;
+
+    protected override void OnInitialized()
+    {
+        Student = Store.GetStudentById(Id);
+    }
+
+    private async Task OnSaveAsync(Student student)
+    {
+        Student = student;
+
+        var result = await Http.PutAsJsonAsync("/student", Student);
+
+        if (result.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/student/list");
+        }
+        else
+        {
+            _errmsg = "保存失败";
+        }
+    }
+}
