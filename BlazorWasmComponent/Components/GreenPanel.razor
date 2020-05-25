@@ -7,19 +7,58 @@
 </div>
 
 <style>
-    .green-panel{
+    .green-panel {
         background-color: green;
-        height:400px;
-        width:400px;
+        height: 400px;
+        width: 400px;
     }
-    .green-panel .title {
-        border-bottom:1px solid #333;
-        height:30px;
-    }
-    .green-panel .content {
-    }
+
+        .green-panel .title {
+            border-bottom: 1px solid #333;
+            height: 30px;
+        }
+
+        .green-panel .content {
+        }
 </style>
 
-@code {
+@implements IDisposable
 
+@code {
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("OnInitialized");
+        base.OnInitialized();
+    }
+    protected override Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync");
+        return base.OnInitializedAsync();
+    }
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("OnParametersSet");
+        base.OnParametersSet();
+    }
+    protected override Task OnParametersSetAsync()
+    {
+        Console.WriteLine("OnParametersSetAsync");
+
+        return base.OnParametersSetAsync();
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine("OnAfterRender");
+        base.OnAfterRender(firstRender);
+    }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("OnAfterRenderAsync");
+        return base.OnAfterRenderAsync(firstRender);
+    }
+
+    public void Dispose()
+    {
+        Console.WriteLine("Dispose");
+    }
 }

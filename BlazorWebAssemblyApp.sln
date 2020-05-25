@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssemblyApp", "Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssemblyApisite", "BlazorWebAssemblyApisite\BlazorWebAssemblyApisite.csproj", "{6239F4D1-1CC4-47FA-86F3-0F2D89D8C39D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasmDataBind", "BlazorWasmDataBind\BlazorWasmDataBind.csproj", "{223C8943-7319-4EBA-AF1D-2DA66287FB67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmDataBind", "BlazorWasmDataBind\BlazorWasmDataBind.csproj", "{223C8943-7319-4EBA-AF1D-2DA66287FB67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasmComponent", "BlazorWasmComponent\BlazorWasmComponent.csproj", "{7197D394-6961-426B-8D82-2BAB7DA5E5FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmComponent", "BlazorWasmComponent\BlazorWasmComponent.csproj", "{7197D394-6961-426B-8D82-2BAB7DA5E5FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
