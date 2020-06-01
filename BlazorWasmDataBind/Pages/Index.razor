@@ -1,7 +1,46 @@
 ﻿@page "/"
+====================parent```==================
 
-<h1>Hello, world!</h1>
+<p>
+    userName: @userInfo.UserName
+</p>
+<p>
+    sex: @userInfo.Sex
+</p>
+<p>
+    brithday: @userInfo.BrithDay
+</p>
+<p>
+    title: @title
+</p>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<InfoEdit UserInfo="userInfo" UserInfoChanged="HandleUserInfoChanged"></InfoEdit>
+
+@code {
+
+    private UserInfo userInfo;
+
+    private string title;
+
+    protected override void OnInitialized()
+    {
+        userInfo = new UserInfo
+        {
+            UserName = "abc",
+            Sex = "f",
+            BrithDay = DateTime.Now
+        };
+        base.OnInitialized();
+    }
+
+    private void HandleUserInfoChanged(UserInfo info)
+    {
+        this.userInfo = info;
+
+        Console.WriteLine("HandleUserInfoChanged");
+    }
+
+
+}
+

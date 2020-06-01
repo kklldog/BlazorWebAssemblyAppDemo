@@ -7,7 +7,7 @@
 
 <h1>Add</h1>
 
-<Edit Student="Student" OnSaveCallback="OnSaveAsync"></Edit>
+<Edit OnSaveCallback="OnSaveAsync"></Edit>
 
 <div class="text-danger">
     @_errmsg
@@ -21,11 +21,6 @@
 
     protected override Task OnInitializedAsync()
     {
-        Student = new Student()
-        {
-            Id = 1
-        };
-
         return base.OnInitializedAsync();
     }
 

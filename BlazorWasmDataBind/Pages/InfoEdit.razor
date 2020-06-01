@@ -1,0 +1,35 @@
+﻿====================child==================
+
+<p>
+    userName: <input @bind="UserInfo.UserName" />
+</p>
+
+<p>
+    sex:
+    <select @bind="UserInfo.Sex">
+        <option value="m">男</option>
+        <option value="f">女</option>
+    </select>
+</p>
+
+<p>
+    BrithDay：<input @bind="UserInfo.BrithDay" />
+</p>
+
+<button class="btn btn-danger" @onclick="InvokeChanged">保存</button>
+
+@code {
+
+    [Parameter]
+    public UserInfo UserInfo { get; set; }
+
+    [Parameter]
+    public EventCallback<UserInfo> UserInfoChanged { get; set; }
+
+    private void InvokeChanged()
+    {
+        UserInfoChanged.InvokeAsync(this.UserInfo);
+        Console.WriteLine("InvokeChanged");
+    }
+
+}
