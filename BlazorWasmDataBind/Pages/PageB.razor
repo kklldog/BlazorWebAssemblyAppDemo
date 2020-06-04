@@ -1,0 +1,39 @@
+﻿@page "/page/b"
+
+<h2>
+    PAGE B
+</h2>
+<p>
+    userName: @UserName
+</p>
+<p>
+    <button @onclick="GoBack">
+        Go back
+    </button>
+</p>
+
+@using Microsoft.AspNetCore.WebUtilities;
+
+@inject NavigationManager NavigationManager;
+
+@code {
+    [Parameter]
+    public string UserName { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        QueryHelpers.ParseQuery(uri.Query).TryGetValue("username", out Microsoft.Extensions.Primitives.StringValues userName);
+        Console.WriteLine(NavigationManager.Uri);
+        UserName = userName.ToString();
+        Console.WriteLine(UserName);
+
+        base.OnInitialized();
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.Back();
+    }
+}

@@ -1,0 +1,20 @@
+﻿@page "/page/a"
+
+<h2>
+    PAGE A
+</h2>
+<p>
+   <button @onclick="GoToB">
+       go to B
+   </button>
+</p>
+
+@inject NavigationManager NavigationManager
+@code {
+
+    private void GoToB()
+    {
+        NavigationManager.NavigateTo("/page/b?username=小猫");
+    }
+
+}
