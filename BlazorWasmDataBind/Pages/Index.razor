@@ -31,6 +31,7 @@
             Sex = "f",
             BrithDay = DateTime.Now
         };
+        this.userInfo.PropertyChanged += (o, e) => StateHasChanged();
         base.OnInitialized();
     }
 
