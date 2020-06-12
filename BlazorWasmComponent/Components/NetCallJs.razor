@@ -1,0 +1,29 @@
+﻿<h3>javascript call .net</h3>
+
+<button id="btn1">
+    Js call .net
+</button>
+@implements IDisposable
+@inject IJSRuntime jsRuntime
+@code {
+    IDisposable _objRef;
+    protected async override Task OnInitializedAsync()
+    {
+        _objRef = DotNetObjectReference.Create(this);
+        await jsRuntime.InvokeAsync<string>(
+            "receiveNetObj",
+           _objRef);
+        base.OnInitialized();
+    }
+
+    [JSInvokable]
+    public string GetNowInInstance()
+    {
+        return DateTime.Now.ToString();
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
+    }
+}
